@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  db:
+    image: mysql
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "8000:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+  elasticsearch:
+    image: elasticsearch:7.6.0
+    volumes:
+      - ./elasticsearch_data:/usr/share/elasticsearch/data
+    ports:
+       - "9300:9300"
+  logstash:
+    image: logstash:7.6.0
+    volumes:
+      - ./:/logstash_dir
+    depends_on:
+      - elasticsearch
+    ports:
+    - "9600:9600"
+  kibana:
+    image: kibana:7.6.0
+    depends_on:
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_URL=http://es:9600
+    ports:
+      - "9601:9601"
+
+volumes:
+  mysql_data:
+  elasticsearch_data:
