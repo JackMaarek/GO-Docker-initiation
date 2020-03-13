@@ -54,7 +54,6 @@ services:
     tty: true
     depends_on:
       - db
-
 volumes:
   mysql_data:
   elasticsearch_data:
