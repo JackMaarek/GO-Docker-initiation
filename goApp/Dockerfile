@@ -13,4 +13,4 @@ RUN go build -o main .
 # Port of for outside access
 EXPOSE 8000
 # Run the go-app executable
-CMD ["./main"]
+CMD ["./go/src/app/main"]
