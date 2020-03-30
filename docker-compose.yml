@@ -23,8 +23,10 @@ services:
       - elasticsearch
     ports:
       - 12201:12201/udp
+    command: bin/logstash-plugin install logstash-input-jdbc
     volumes:
       - ./config/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+      - ./config/logstash/mysql-connector-java-8.0.15.jar:/opt/mysql-connector-java-8.0.15.jar
     networks:
       - logging-network
 
