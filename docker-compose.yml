@@ -9,6 +9,12 @@ services:
     - 12201:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testgoapp
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    volumes:
+    - ./config/mysql/mysql.cnf:/etc/mysql/conf.d/
+    - ./config/mysql/setup.sql:/docker-entrypoint-initdb.d/
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.1.1
     environment:
